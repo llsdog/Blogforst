@@ -1,3 +1,16 @@
+.custom-focus {
+    --bs-focus-ring-color: rgba(0, 0, 0, 0);
+}
+
+.custom-focus {
+    --bs-focus-ring-color: rgba(178, 189, 235, 0.42);
+    --bs-focus-ring-width: 0.4rem;
+}
+
+.custom-spacing {
+    margin-top: 120px;
+}
+
 #body-home {
     background-image: url(../src/img/LL_moon.jpg);
     background-repeat: no-repeat;
@@ -7,5 +20,14 @@
 
 #nav {
     font-family: STHupo, serif;
+}
+
+#body-home-title {
+    font-family: STHupo, serif;
+    background: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
