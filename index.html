@@ -13,38 +13,48 @@
             .forEach(el => new bootstrap.Tooltip(el))
     </script>
 
-    <!--index.css Linked-->
+    <!--index.css index.js Linked-->
     <link rel="stylesheet" href="./styles/index.css">
+    <script src="./scripts/index.js"></script>
 
     <!--Tailwind-->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--背景图预加载-->
+    <link rel="preload" as="image" href="./src/img/LL_moon.jpg">
 
     <title>铃兰的狗的博客</title>
 </head>
 <body>
 
-<div id="body-home" >
-    <!--导航栏-->
-    <section class="container">
-        <div class="d-flex justify-content-center" id="nav">
-            <div class="btn-group">
-                <button type="button" class="btn text-white rounded-3 focus-ring custom-focus">首页</button>
-                <button type="button" class="btn text-white rounded-3 focus-ring custom-focus">关于我</button>
+<div id="body-home" class="container-fluid">
+    <!--上半部分-->
+    <div id="body-home-top" class="container-fluid d-flex flex-column w-100">
+        <!--导航栏-->
+        <section class="container">
+            <div class="d-flex flex-row justify-content-center" id="nav">
+                <div class="btn-group">
+                    <button type="button" class="btn text-white rounded-3 focus-ring custom-focus btn-enhance">首页</button>
+                    <button type="button" class="btn text-white rounded-3 focus-ring custom-focus btn-enhance">关于我</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!--主页-->
-    <section class="custom-spacing">
-        <div class="container d-flex justify-content-center">
-            <h1 class="display-5" id="body-home-title">Bonjour!欢迎来到铃兰的狗的Blog</h1>
-        </div>
-    </section>
+        <!--主页-->
+        <section class="container custom-spacing">
+            <div class="d-flex justify-content-center">
+                <h1 class="display-5" id="body-home-title">Bonjour!欢迎来到铃兰的狗的Blog</h1>
+            </div>
+        </section>
 
-    <section>
+        <!---->
+        <section>
 
-    </section>
+        </section>
+    </div>
 
+
+    <!--内容主体-->
     <section>
         <div>
             <div>
