@@ -4,8 +4,7 @@
 }
 
 .custom-spacing {
-    margin-top: 300px;
-    margin-bottom: 400px;
+
 }
 
 .btn-enhance:hover {
@@ -19,12 +18,23 @@
 }
 
 #body-home-top {
-    margin: 0;
+    border-bottom: 1px solid rgba(208, 209, 203, 0.5);
+    min-height: 80vh;
     background-image: url(../src/img/LL_moon.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: scroll;
     background-size: auto;
+}
+
+#body-home-top-title {
+    margin: auto 0;
+}
+
+#body-home-bottom {
+    min-height: 20vh;
+    margin: 0;
+    background: rgba(208, 209, 203, 0.5);
 }
 
 #nav {
