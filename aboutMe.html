@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Bootstrap5网页适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap5核心CSS与JS脚本-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            .forEach(el => new bootstrap.Tooltip(el))
+    </script>
+
+    <!--index.css index.js Linked-->
+    <link rel="stylesheet" href="./styles/aboutMe.css">
+    <script src="./scripts/aboutMe.js"></script>
+
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--背景图预加载-->
+    <link rel="preload" as="image" href="./src/img/HH_sun.jpg">
+
+    <title>LkvO's Blog</title>
+</head>
+<body>
+
+<div id="body-home" class="container-fluid">
+    <!--上半部分-->
+    <div id="body-home-top" class="container-fluid d-flex flex-column w-100 align-items-center border-bottom">
+        <!--导航栏-->
+        <section class="container justify-content-center w-25">
+            <div id="nav" class="d-flex flex-row justify-content-center rounded-5">
+                <div class="btn-group">
+                    <button type="button" onclick="window.location.href='index.html'" class="btn rounded-4 focus-ring custom-focus btn-enhance">Home Page</button>
+                    <button type="button" onclick="window.location.href='aboutMe.html'" class="btn rounded-4 focus-ring custom-focus btn-enhance">About Me</button>
+                </div>
+            </div>
+        </section>
+
+        <!--主页-->
+        <section id="body-home-top-title" class="container custom-spacing">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column align-items-start w-100 mt-5">
+                    <div class="d-flex w-100 gap-3">
+                        <div class="flex-fill p-3 rounded-4" style="background: rgba(255,255,255,0.5);">
+                            <h1 class="display-5" id="body-home-title">
+                                School: <br>
+                                Univercity of Sicence and Technology of China.
+                            </h1>
+                        </div>
+                        <div class="flex-fill p-3 rounded-4" style="background: rgba(255,255,255,0.5);">
+                            <h1 class="display-5" id="body-home-title">
+                                Hobbies: <br>
+                                Rhythm Games, Programming, Anime, Table Tennis.</h1>
+                        </div>
+                        <div class="flex-fill p-3 rounded-4" style="background: rgba(255,255,255,0.5);">
+                            <h1 class="display-5" id="body-home-title">
+                                Languages: <br>
+                                Chinese, English.</h1>
+                        </div>
+                        </div>
+                        <div class="w-100 mt-3">
+                            <div class="flex-fill p-3 rounded-4" style="background: rgba(255,255,255,0.5);">
+                                <h1 class="display-5" id="body-home-title">
+                                    Social Media:
+                                    <a href="https://space.bilibili.com/106352685" target="_blank">Bilibili</a>
+                                    <a href="https://github.com/Likvo-g" target="_blank">GitHub</a>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="d-flex w-100 gap-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!---->
+        <section>
+
+        </section>
+    </div>
+
+
+    <!--内容主体-->
+    <section id="body-home-bottom" class="container-fluid d-flex w-100">
+        <div>
+            <div>
+                <div>
+
+                </div>
+
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+
+    </div>
+
+    <section>
+
+    </section>
+
+</div>
+
+</body>
+</html>
