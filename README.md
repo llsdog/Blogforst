@@ -1,2 +1,2 @@
 # Blogforst
-Undate when I study new thing
+A project for frontend study
