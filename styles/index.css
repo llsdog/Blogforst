@@ -27,7 +27,7 @@
     background-size: cover;
 }
 
-#body-home-top-title {
+#body-home-top-title-section {
     margin: auto 0;
 }
 
@@ -41,8 +41,9 @@
     font-family: STHupo, serif;
 }
 
-#body-home-title {
+#body-home-top-title-title {
     font-family: STHupo, serif;
+    text-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
     background: -webkit-linear-gradient(135deg,
     #ffd8d1,
     #e44fac 25%,
@@ -59,11 +60,11 @@
     /* 背景图放大一下，看着柔和一些 */
     -webkit-background-size: 200% 100%;
     /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
-    -webkit-animation: flowCss 12s infinite linear;
+    -webkit-animation: flowCss 36s infinite linear;
 }
 
 #body-home-title:hover {
-    -webkit-animation: flowCss 8s infinite linear;
+    -webkit-animation: flowCss 12s infinite linear;
 }
 
 @-webkit-keyframes flowCss {
