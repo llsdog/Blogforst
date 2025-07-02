@@ -24,7 +24,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: scroll;
-    background-size: auto;
+    background-size: cover;
 }
 
 #body-home-top-title {
@@ -43,11 +43,23 @@
 
 #body-home-title {
     font-family: STHupo, serif;
-    background: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    background: -webkit-linear-gradient(135deg,
+    #ffd8d1,
+    #e44fac 25%,
+    #fddb92 50%,
+    #dfd96e 55%,
+    #78d6ea 60%,
+    #b079e1 80%,
+    #ec92a4 95%,
+    #ffd8d1);
+    /* 文字颜色填充设置为透明 */
     -webkit-text-fill-color: transparent;
-    display: inline-block;
+    /* 背景裁剪，即让文字使用背景色 */
+    -webkit-background-clip: text;
+    /* 背景图放大一下，看着柔和一些 */
+    -webkit-background-size: 200% 100%;
+    /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+    -webkit-animation: flowCss 12s infinite linear;
 }
 
 #body-home-title:hover {
