@@ -1,2 +1,2 @@
 # Blogforst
-A project for frontend study
+A project for my frontend study
