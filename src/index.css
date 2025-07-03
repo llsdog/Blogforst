@@ -1,0 +1,77 @@
+.custom-focus {
+    --bs-focus-ring-color: rgba(208, 209, 203, 0.5);
+    --bs-focus-ring-width: 0.4rem;
+}
+
+.custom-spacing {
+
+}
+
+.btn-enhance:hover {
+    background: rgba(208, 209, 203, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(208, 209, 203, 0.5);
+}
+
+#body-home {
+    padding: 0;
+}
+
+#body-home-top {
+    min-height: 80vh;
+    background-image: url(./img/LL_moon.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+#body-home-top-title-section {
+    margin: auto 0;
+}
+
+#body-home-bottom {
+    min-height: 20vh;
+    margin: 0;
+}
+
+#nav {
+    font-family: STHupo, serif;
+}
+
+#body-home-top-title-title {
+    font-family: STHupo, serif;
+    text-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+    background: -webkit-linear-gradient(135deg,
+    #ffd8d1,
+    #e44fac 25%,
+    #fddb92 50%,
+    #dfd96e 55%,
+    #78d6ea 60%,
+    #b079e1 80%,
+    #ec92a4 95%,
+    #ffd8d1);
+    /* 文字颜色填充设置为透明 */
+    -webkit-text-fill-color: transparent;
+    /* 背景裁剪，即让文字使用背景色 */
+    -webkit-background-clip: text;
+    /* 背景图放大一下，看着柔和一些 */
+    -webkit-background-size: 200% 100%;
+    /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+    -webkit-animation: flowCss 36s infinite linear;
+}
+
+#body-home-title:hover {
+    -webkit-animation: flowCss 12s infinite linear;
+}
+
+@-webkit-keyframes flowCss {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -400% 0;
+    }
+}
+

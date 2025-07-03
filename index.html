@@ -5,13 +5,8 @@
     <!--Bootstrap5网页适应-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--Bootstrap5核心CSS与JS脚本-->
-    <link rel="stylesheet" href="./styles/bootstrap.min.css">
-    <script src="./scripts/bootstrap.min.js"></script>
-
-    <!--index.css index.js Linked-->
-    <link rel="stylesheet" href="./styles/index.css">
-    <script src="./scripts/index.js"></script>
+    <!--主要JS导入-->
+    <script type="module" src="src/main.js"></script>
 
     <!--背景图预加载-->
     <link rel="preload" as="image" href="./src/img/LL_moon.jpg">
@@ -28,8 +23,8 @@
         <section class="container justify-content-center w-25">
             <div id="nav" class="d-flex flex-row justify-content-center rounded-5">
                 <div class="btn-group">
-                    <button type="button" onclick="switchButtonToMainPage()" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">首页</button>
-                    <button type="button" onclick="switchButtonToReadMe()" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">关于我</button>
+                    <button type="button" id="button-to-readme" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">首页</button>
+                    <button type="button" id="button-to-mainpage" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">关于我</button>
                 </div>
             </div>
         </section>
