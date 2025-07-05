@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--Bootstrap5 adaptation-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--JS resource-->
     <script type="module" src="src/main.js"></script>
-
-    <!--Lazy loading-->
     <link rel="preload" as="image" href="./src/img/LL_moon.jpg">
     <link rel="preload" as="image" href="./src/img/LL_sun.jpg">
 
@@ -16,11 +11,11 @@
 </head>
 <body>
 
-<div id="body-home" class="container-fluid">
+<div id="body-home" class="container-fluid p-0">
     <!--upper section-->
-    <div id="body-home-top" class="container-fluid d-flex flex-column w-100 align-items-center border-bottom">
+    <div id="body-home-top" class="container-fluid d-flex flex-column w-100 align-items-center border-bottom-0 position-relative">
         <!--Nav bar-->
-        <section class="container justify-content-center w-25">
+        <section class="container d-flex justify-content-center" style="width: 25%; min-width: 300px;">
             <div id="nav" class="d-flex flex-row justify-content-center rounded-5">
                 <div class="btn-group">
                     <button type="button" id="button-to-mainpage" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance page-button">首页</button>
@@ -30,37 +25,59 @@
         </section>
 
         <!--mainPage-->
-        <section id="body-home-top-title-section" class="container custom-spacing">
-            <div class="d-flex justify-content-center">
-                <h1 class="display-5" id="body-home-top-title-title">Bonjour!欢迎来到铃兰的狗的Blog</h1>
+        <section id="body-home-top-title-section" class="container custom-spacing align-items-center">
+            <div class="d-flex justify-content-center w-100">
+                <h1 class="display-5 text-center" id="body-home-top-title-title">Bonjour!欢迎来到铃兰的狗的Blog</h1>
             </div>
         </section>
+
+        <div class="trapezoid"></div>
+
     </div>
 
+
     <!--mainSection-->
-    <section id="body-home-bottom-mainpage" class="page container-fluid d-flex w-100">
-        <div>
-            <div>
-                <div>
+    <section id="body-home-bottom-mainpage" class="page container-fluid d-flex w-100 py-4">
 
-                </div>
+        <div class="blog-post-w row w-100 justify-content-center p-3">
 
-                <div>
+            <div class="blog-post-w col-12 col-md-8 clo-lg-16 p-3">
 
+                <div class="blog-post-w d-flex flex-column align-items-center gap-4 p-3">
+
+                    <article class="blog-post rounded-4 border border-2 border-dark p-3 position-relative">
+
+                        <div class="blog-post-w blog-post-div d-inline-block float-start">
+
+                            <img class="blog-post-div-img img-fluid" src="./src/img/Amiya_wtf.jpg" alt="">
+
+                        </div>
+
+                        <div class="d-inline-block">
+
+                        </div>
+
+                    </article>
+
+                    <article class="blog-post rounded-4 border border-2 border-dark p-4">
+
+                    </article>
                 </div>
             </div>
         </div>
+
+        <div>
+
+        </div>
     </section>
 
-    <section id="body-home-bottom-readme" class="page container-fluid d-flex w-100">
-        <div>
-            <div>
-                <div>
+    <section id="body-home-bottom-readme" class="page container-fluid d-flex w-100 py-4">
+        <div class="row w-100">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-6">
 
-                </div>
-
-                <div>
-
+                    </div>
                 </div>
             </div>
         </div>
