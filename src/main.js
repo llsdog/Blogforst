@@ -2,75 +2,64 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import gsap from "gsap";
 import './index.css';
-import moonImg from './img/LL_moon.jpg';
-import sunImg from './img/LL_sun.jpg';
-
-// 初始化页面
-let pageNumber = 1; //当前页数
-
 
 //切换分页按钮函数
-function switchButtonToReadMe () {
-    console.log("切换分页");
-    
-    const bodyHomeTop = document.querySelector("#body-home-top");
+function showPage(pageId, methodName) {
+    //移除所有页面的active属性
+    const allPages = document.querySelectorAll('.page');
+    allPages.forEach(page => {
+        page.classList.remove('active');
+    });
 
-    if (pageNumber === 1) {
-        pageNumber = 2;
+    //显示目标页面
+    const bodyHomeTop = document.querySelector("#body-home-top");
+    const targetPage = document.getElementById(pageId);
+    if (pageId === 'body-home-bottom-mainpage') {
+        if (methodName === 'load') {
+            bodyHomeTop.classList.remove('page-background-sun');
+            bodyHomeTop.classList.add('page-background-moon');
+            return;
+        }
         gsap.to(bodyHomeTop, {
             x: 100,
             duration: 0.5,
             onComplete: () => {
-                bodyHomeTop.style.backgroundImage = `url(${moonImg})`;
+                bodyHomeTop.classList.remove('page-background-sun');
+                bodyHomeTop.classList.add('page-background-moon');
+                targetPage.classList.add('active');
                 gsap.to(bodyHomeTop, {x: 0, duration: 0.5});
             }
         });
-    }  else {
-        gsap.to(bodyHomeTop, {
-            y: 50,
-            duration: 0.5,
-            onComplete: () => {
-                gsap.to(bodyHomeTop, {y: 0, duration: 0.5});
-            }
-        })
-    }
-}
-
-//切换主页按钮函数
-function switchButtonToMainPage () {
-    console.log("切换主页");
-
-    const bodyHomeTop = document.querySelector("#body-home-top");
-
-    if (pageNumber === 2) {
-        pageNumber = 1;
+    } else if (pageId === 'body-home-bottom-readme') {
+        if (methodName === 'load') {
+            bodyHomeTop.classList.remove('page-background-moon');
+            bodyHomeTop.classList.add('page-background-sun');
+            return;
+        }
         gsap.to(bodyHomeTop, {
             x: -100,
             duration: 0.5,
             onComplete: () => {
-                bodyHomeTop.style.backgroundImage = `url(${sunImg})`;
+                bodyHomeTop.classList.remove('page-background-moon');
+                bodyHomeTop.classList.add('page-background-sun');
+                targetPage.classList.add('active');
                 gsap.to(bodyHomeTop, {x: 0, duration: 0.5});
             }
         });
-    } else {
-        gsap.to(bodyHomeTop, {
-            y: 50,
-            duration: 0.5,
-            onComplete: () => {
-                gsap.to(bodyHomeTop, {y: 0, duration: 0.5});
-            }
-        })
     }
 }
 
 //按钮绑定
-document.getElementById("button-to-readme").addEventListener("click", switchButtonToReadMe);
-document.getElementById("button-to-mainpage").addEventListener("click", switchButtonToMainPage);
+document.getElementById("button-to-mainpage").addEventListener("click",
+    function () {
+        showPage('body-home-bottom-mainpage', 'click');
+    });
+document.getElementById("button-to-readme").addEventListener("click",
+    function () {
+        showPage('body-home-bottom-readme', 'click');
+});
 
-// 页面加载时标题的动画效果
-gsap.from("#body-home-top-title-title", {
-    y: 70,
-    opacity: 0.5,
-    duration: 1,
-    ease: "power2.out"
+// 页面加载完成后显示主页
+document.addEventListener('DOMContentLoaded', function() {
+    showPage('body-home-bottom-mainpage', 'load');
 });

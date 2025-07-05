@@ -1,3 +1,11 @@
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
 .custom-focus {
     --bs-focus-ring-color: rgba(208, 209, 203, 0.5);
     --bs-focus-ring-width: 0.4rem;
@@ -13,26 +21,49 @@
     box-shadow: 0 6px 20px rgba(208, 209, 203, 0.5);
 }
 
+.btn-enhance:active {
+    background: rgba(208, 209, 203, 0.7);
+    transform: scale(1);
+    box-shadow: 0 6px 20px rgba(208, 209, 203, 0.7);
+}
+
+.page-background-moon {
+    background-image: linear-gradient(to bottom,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.2) 10%,
+        rgba(0,0,0,0) 90%,
+        rgba(0,0,0,0) 100%
+    ), url('./img/LL_moon.jpg') !important;
+}
+
+.page-background-sun {
+    background-image: linear-gradient(to bottom,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.2) 10%,
+        rgba(0,0,0,0) 90%,
+        rgba(0,0,0,0) 100%
+    ), url('./img/LL_sun.jpg') !important;
+}
+
 #body-home {
     padding: 0;
 }
 
 #body-home-top {
     min-height: 80vh;
-    background-image: url(./img/LL_moon.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: scroll;
     background-size: cover;
+    position: relative;
 }
 
 #body-home-top-title-section {
     margin: auto 0;
 }
 
-#body-home-bottom {
-    min-height: 20vh;
-    margin: 0;
+#body-home-bottom-mainpage {
+    min-height: 30vh;
 }
 
 #nav {

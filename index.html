@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--Bootstrap5网页适应-->
+    <!--Bootstrap5 adaptation-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--主要JS导入-->
+    <!--JS resource-->
     <script type="module" src="src/main.js"></script>
 
-    <!--背景图预加载-->
+    <!--Lazy loading-->
     <link rel="preload" as="image" href="./src/img/LL_moon.jpg">
     <link rel="preload" as="image" href="./src/img/LL_sun.jpg">
 
@@ -17,19 +17,19 @@
 <body>
 
 <div id="body-home" class="container-fluid">
-    <!--上半部分-->
+    <!--upper section-->
     <div id="body-home-top" class="container-fluid d-flex flex-column w-100 align-items-center border-bottom">
-        <!--导航栏-->
+        <!--Nav bar-->
         <section class="container justify-content-center w-25">
             <div id="nav" class="d-flex flex-row justify-content-center rounded-5">
                 <div class="btn-group">
-                    <button type="button" id="button-to-readme" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">首页</button>
-                    <button type="button" id="button-to-mainpage" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance">关于我</button>
+                    <button type="button" id="button-to-mainpage" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance page-button">首页</button>
+                    <button type="button" id="button-to-readme" class="btn text-white rounded-4 focus-ring custom-focus btn-enhance page-button">关于我</button>
                 </div>
             </div>
         </section>
 
-        <!--主页-->
+        <!--mainPage-->
         <section id="body-home-top-title-section" class="container custom-spacing">
             <div class="d-flex justify-content-center">
                 <h1 class="display-5" id="body-home-top-title-title">Bonjour!欢迎来到铃兰的狗的Blog</h1>
@@ -37,8 +37,8 @@
         </section>
     </div>
 
-    <!--内容主体-->
-    <section id="body-home-bottom" class="container-fluid d-flex w-100">
+    <!--mainSection-->
+    <section id="body-home-bottom-mainpage" class="page container-fluid d-flex w-100">
         <div>
             <div>
                 <div>
@@ -52,11 +52,18 @@
         </div>
     </section>
 
-    <div>
+    <section id="body-home-bottom-readme" class="page container-fluid d-flex w-100">
+        <div>
+            <div>
+                <div>
 
-    </div>
+                </div>
 
-    <section>
+                <div>
+
+                </div>
+            </div>
+        </div>
 
     </section>
 
