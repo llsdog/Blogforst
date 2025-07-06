@@ -92,6 +92,22 @@
     object-fit: contain;
 }
 
+.blog-title {
+    font-family: STHupo, serif;
+}
+
+.blog-text {
+    font-size: 50%;
+}
+
+.blog-post-box {
+    height: 50px;
+}
+
+.blog-i {
+    font-size: xx-small;
+}
+
 #body-home-top {
     min-height: 80vh;
     padding: 0;
