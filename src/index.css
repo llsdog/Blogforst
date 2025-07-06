@@ -85,6 +85,13 @@
     object-fit: contain;
 }
 
+.video-webm {
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+
 #body-home-top {
     min-height: 80vh;
     padding: 0;

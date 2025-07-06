@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div id="body-home" class="container-fluid p-0">
+<div id="body-home" class="container-fluid p-0 position-relative">
     <!--upper section-->
     <div id="body-home-top" class="container-fluid d-flex flex-column w-100 align-items-center border-bottom-0 position-relative">
         <!--Nav bar-->
@@ -31,7 +31,15 @@
             </div>
         </section>
 
-        <div class="trapezoid"></div>
+        <div class="position-relative container-fluid z-1 d-flex justify-content-center">
+            <video class="video-webm" autoplay muted loop>
+                <source src="./src/video/LL-front-Skill3_Loop-x1.webm" type="video/webm">
+            </video>
+            <video class="video-webm" autoplay muted loop>
+                <source src="./src/video/LL-front-Idle-x1.webm" type="video/webm">
+            </video>
+        </div>
+        <div class="trapezoid position-absolute bottom-0 z-0"></div>
 
     </div>
 
@@ -49,17 +57,17 @@
 
                         <div class="blog-post-w blog-post-div d-inline-block float-start">
 
-                            <img class="blog-post-div-img img-fluid" src="./src/img/Amiya_wtf.jpg" alt="">
+                            <img class="blog-post-div-img img-fluid" src="./src/img/Amiya_wtf.jpg" alt="丰矿的阿米娅">
 
                         </div>
 
-                        <div class="d-inline-block">
-
+                        <div class="blog-post-w d-flex p-1">
+                            <h5 class="p-1">丰矿的阿米娅</h5>
                         </div>
 
                     </article>
 
-                    <article class="blog-post rounded-4 border border-2 border-dark p-4">
+                     <article class="blog-post rounded-4 border border-2 border-dark p-4">
 
                     </article>
                 </div>
