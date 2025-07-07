@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    will-change: transform;
 }
 
 .page {
@@ -17,6 +18,10 @@
     --bs-focus-ring-width: 0.4rem;
 }
 
+.btn-enhance {
+    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
 .btn-enhance:hover {
     background: rgba(208, 209, 203, 0.5);
     transform: scale(1.05);
@@ -25,7 +30,7 @@
 
 .btn-enhance:active {
     background: rgba(208, 209, 203, 0.7);
-    transform: scale(1);
+    transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(208, 209, 203, 0.7);
 }
 
@@ -127,6 +132,18 @@
 .blog-small-card {
     background: rgba(255, 255, 255, 1);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.blog-small-card-effect {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s , box-shadow 0.3s, transform 0.3s;
+}
+
+.blog-small-card-effect:hover {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.03);
 }
 
 #body-home-top {

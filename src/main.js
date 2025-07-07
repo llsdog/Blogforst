@@ -63,4 +63,23 @@ document.getElementById("button-to-readme").addEventListener("click",
 // 页面加载完成后显示主页
 document.addEventListener('DOMContentLoaded', function () {
     showPage('body-home-bottom-mainpage', 'load');
+    console.log("加载成功, 欢迎来到我的Blog");
 });
+
+//加载一言
+fetch('https://v1.hitokoto.cn/')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('hitokoto').innerText = data.hitokoto;
+
+        //显示出处
+        const fromElement = document.getElementById('hitokoto-type');
+        if (data.from) {
+            fromElement.innerText = `—— ${data.from}`;
+            fromElement.style.display = 'inline-block';
+        } else {
+            fromElement.style.display = 'none';
+        }
+    })
+    .catch(console.error);
+
