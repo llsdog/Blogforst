@@ -58,9 +58,9 @@ document.getElementById("button-to-mainpage").addEventListener("click",
 document.getElementById("button-to-readme").addEventListener("click",
     function () {
         showPage('body-home-bottom-readme', 'click');
-});
+    });
 
 // 页面加载完成后显示主页
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showPage('body-home-bottom-mainpage', 'load');
 });

@@ -31,8 +31,8 @@
 
 .page-background-moon {
     background-image: linear-gradient(to bottom,
-        rgba(0,0,0,0.4) 0%,
-        rgba(0,0,0,0.2) 10%,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.1) 10%,
         rgba(0,0,0,0) 90%,
         rgba(0,0,0,0) 100%
     ), url('./img/LL_moon.jpg') !important;
@@ -40,8 +40,8 @@
 
 .page-background-sun {
     background-image: linear-gradient(to bottom,
-        rgba(0,0,0,0.4) 0%,
-        rgba(0,0,0,0.2) 10%,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.1) 10%,
         rgba(0,0,0,0) 90%,
         rgba(0,0,0,0) 100%
     ), url('./img/LL_sun.jpg') !important;
@@ -51,7 +51,7 @@
     width: 100%;
     height: 60px;
     margin: 0;
-    background: rgba(221, 217, 217, 0.96);
+    background: rgba(221, 217, 217, 0.95);
     clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
     display: flex;
     justify-content: center;
@@ -106,6 +106,18 @@
 
 .blog-i {
     font-size: xx-small;
+}
+
+.gradient-text {
+    background: linear-gradient(to right,
+    #000000, #000000) no-repeat right bottom;
+    background-size: 0 2px;
+    transition: background-size 1300ms;
+}
+
+.gradient-text:hover {
+    background-position-x: left;
+    background-size: 100% 2px;
 }
 
 #body-home-top {
