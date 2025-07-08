@@ -154,6 +154,7 @@ function getTimeAgo(dataString) {
 //function to render activities
 function renderActivities(activities) {
     const container = document.getElementById('activity-cards');
+    container.innerHTML = '';
 
     container.innerHTML = activities.map((activity, index) => `
         <div class="blog-small-card-effect blog-post-w d-flex flex-row align-items-center me-auto rounded-3 m-2 col-14" style="animation-delay: ${index * 0.1}s">
@@ -209,7 +210,7 @@ document.getElementById("button-to-readme").addEventListener("click",
     });
 
 //加载一言
-fetch('https://v1.hitokoto.cn/')
+fetch('/hitokoto')
     .then(response => response.json())
     .then(data => {
         document.getElementById('hitokoto').innerText = data.hitokoto;
