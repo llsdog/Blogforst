@@ -1,18 +1,42 @@
 ---
-title: "丰矿的阿米娅"
+title: "README.md"
 author: "llsdog"
 date: "2025-7-8"
-description: "测试内容:如图,这是一个丰矿的阿米娅. 阿米娅正在发封"
+description: "关于Blogforst"
 image: "./public/blog/blog_1/blog_1_img1.jpg"
 tags: ["Test", "Amiya"]
 comments: 0
 ---
 
-# Crazy Amiya
+# 关于Blogforst
 
 ![Crazy Amiya](./blog_1_img1.jpg)
 
-This is a test content. As shown in the picture, this is a crazy Amiya
+# Blogforst
+## 一个从零开始的开源博客网站
+### 该项目从原生的前端框架开始
+### 在我学习前端的过程中将会不断
+1. **逐步完善网站**
+2. **优化目录结构**
+3. **引入更多开源库**
+4. **尝试从原生转至更加现代化的开发方式**
+
+***欢迎创建分支来和我一起学习前端***
+
+此项目没有太大的开源的开源价值, 为个人学习使用, 详情请看开源许可证
+
+## How to get your own github activities in Blog
+1.Creat "Blogforst/scr/config.js"
+
+2.Write like this:
+````javascript
+export const config = {
+    github: {
+        token: 'Your_Github_PAT',
+        username : 'Your_Github_Name'
+    }
+}   
+
 
 ## More Information
 

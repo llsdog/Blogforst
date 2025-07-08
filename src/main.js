@@ -5,6 +5,7 @@ import gsap from "gsap";
 import './index.css';
 import { initBlogs } from "./blogManager.js";
 import { getRecentActivities } from "./githubActivityManager.js";
+import SnowEffect from "./snowEffect.js";
 
 //Page switch function
 function showPage(pageId, methodName) {
@@ -85,6 +86,16 @@ document.addEventListener('DOMContentLoaded', function () {
     showPage('body-home-bottom-mainpage', 'load');
     getRecentActivities(); //获取最近的活动
     initBlogs(); //Init Blog
+    SnowEffect.start({
+        maxSnowflakes: 150,        // 最大雪花数量
+        snowflakeColor: '#ffffff', // 雪花颜色
+        minSize: 3,                // 最小尺寸
+        maxSize: 10,                // 最大尺寸
+        minSpeed: 0.2,             // 最小速度
+        maxSpeed: 2,               // 最大速度
+        wind: 0.2,                 // 风力强度
+        zIndex: 9999               // 层级
+    });
     console.log("加载成功, 欢迎来到我的Blog");
 });
 

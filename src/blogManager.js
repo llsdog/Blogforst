@@ -147,7 +147,9 @@ export class BlogManager {
                 </div>
                 
                 <div class="d-flex flex-column p-1">
-                    <h4 class="gradient-text blog-title p-1 text-start d-flex col-5">${title}</h4>
+                    <div class="d-flex flex-row m-1">
+                        <h4 class="gradient-text blog-title p-1 text-start d-flex col-5">${title}</h4>
+                    </div>
                     
                     <span class="gradient-text blog-text p-1 fs-6 text-start d-flex m-1">
                         ${description}
