@@ -11,3 +11,14 @@
 
 此项目没有太大的开源的开源价值, 为个人学习使用, 详情请看开源许可证
 
+## How to get your own github activities in Blog
+1.Creat "Blogforst/scr/config.js"
+
+2.Write like this:
+````javascript
+export const config = {
+    github: {
+        token: 'Your_Github_PAT',
+        username : 'Your_Github_Name'
+    }
+}   
