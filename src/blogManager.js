@@ -237,7 +237,7 @@ function openBlogDetail(filename) {
 function showBlogModal(blog) {
     const modal = `
         <div>
-        
+            
         </div>
     `;
 

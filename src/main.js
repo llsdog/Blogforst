@@ -53,7 +53,7 @@ function showPage(pageId, methodName) {
     }
 }
 
-//button
+//Listener
 document.getElementById("button-to-mainpage").addEventListener("click",
     function () {
         showPage('body-home-bottom-mainpage', 'click');
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
     getRecentActivities(); //获取最近的活动
     initBlogs(); //Init Blog
     SnowEffect.start({
-        maxSnowflakes: 150,        // 最大雪花数量
+        maxSnowflakes: 250,        // 最大雪花数量
         snowflakeColor: '#ffffff', // 雪花颜色
         minSize: 3,                // 最小尺寸
         maxSize: 10,                // 最大尺寸
         minSpeed: 0.2,             // 最小速度
         maxSpeed: 2,               // 最大速度
         wind: 0.2,                 // 风力强度
-        zIndex: 9999               // 层级
+        zIndex: 1060               // 层级
     });
     console.log("加载成功, 欢迎来到我的Blog");
 });
