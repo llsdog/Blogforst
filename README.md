@@ -22,3 +22,37 @@ export const config = {
         username : 'Your_Github_Name'
     }
 }   
+````
+
+## How to customize your SnowEffect
+
+### In Blogforst/src/main.js
+```javascript
+SnowEffect.start({
+    maxSnowflakes: 150,        // max number of snowflakes
+    snowflakeColor: '#ffffff', // snowflakes's color
+    minSize: 2,                // min size
+    maxSize: 6,                // max size
+    minSpeed: 0.5,             // min speed of snowflakes
+    maxSpeed: 2,               // max speed of snowflakes
+    wind: 0.3,                 // wind force intensity
+    zIndex: 9999               // Z-index
+});
+```
+### Other method
+```javascript
+// stop effect
+SnowEffect.stop();
+
+// restart
+SnowEffect.start();
+
+// clear snowflakes
+SnowEffect.destroy();
+
+// change midway
+SnowEffect.setOptions({
+    maxSnowflakes: 200,
+    snowflakeColor: '#87CEEB'
+});
+```
