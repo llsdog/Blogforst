@@ -3,9 +3,10 @@ import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import gsap from "gsap";
 import './index.css';
-import { initBlogs } from "./blogManager.js";
 import { getRecentActivities } from "./githubActivityManager.js";
+import { initBlogs, blogManager } from "./blogManager.js";
 import SnowEffect from "./snowEffect.js";
+
 
 //Page switch function
 function showPage(pageId, methodName) {
@@ -53,6 +54,20 @@ function showPage(pageId, methodName) {
     }
 }
 
+function handleInitialUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogParam = urlParams.get('blog');
+
+    if (blogParam) {
+        setTimeout(() => {
+            const blog = blogManager.getBlogByFilename(blogParam);
+            if(blog) {
+                blogManager.switchToDetailView(blog);
+            }
+        }, 500);
+    }
+}
+
 //Listener
 document.getElementById("button-to-mainpage").addEventListener("click",
     function () {
@@ -85,7 +100,12 @@ fetch('/hitokoto')
 document.addEventListener('DOMContentLoaded', function () {
     showPage('body-home-bottom-mainpage', 'load');
     getRecentActivities(); //获取最近的活动
-    initBlogs(); //Init Blog
+    initBlogs().then(() => {
+        handleInitialUrl(); //处理初始URL
+    }); //Init Blog
+    window.addEventListener('popstate', (event) => {
+        blogManager.handlePopState(event);
+    });
     SnowEffect.start({
         maxSnowflakes: 250,        // 最大雪花数量
         snowflakeColor: '#ffffff', // 雪花颜色
@@ -94,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         minSpeed: 0.2,             // 最小速度
         maxSpeed: 2,               // 最大速度
         wind: 0.2,                 // 风力强度
-        zIndex: 1060               // 层级
+        zIndex: 999               // 层级
     });
     console.log("加载成功, 欢迎来到我的Blog");
 });

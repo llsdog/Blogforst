@@ -48,13 +48,13 @@
 
 
     <!--mainSection-->
-    <section id="body-home-bottom-mainpage" class="page container-fluid d-flex w-100 py-4">
+    <section id="body-home-bottom-mainpage" class="page container-fluid d-flex flex-column w-100 py-4">
 
         <div class="row w-100 justify-content-center p-3">
 
             <div class="p-2 d-flex flex-row justify-content-between">
 
-                <div class="blog-large-card blog-post-w d-flex flex-column gap-4 p-3 ms-auto col-2 rounded-3">
+                <div class="blog-large-card d-flex flex-column gap-4 p-3 ms-auto col-2 rounded-3">
 
                     <div class="blog-small-card-effect blog-post-w d-flex flex-column align-items-center ms-auto col-12 rounded-3">
                         <img class="blog-post-div-img rounded-circle" style="width: 40%" src="./src/img/avatar.jpg" alt="">
@@ -91,8 +91,28 @@
                 <div class="blog-large-card blog-post-w container d-flex flex-column align-items-center col-5 gap-4 p-1 m-1 rounded-3">
                     <i class=""></i>
 
-                    <div id="blog-cards-container" class="container d-flex flex-column align-items-center col-5 gap-4 p-1 m-1 rounded-3">
+                    <div id="blog-list-view" class="blog-view container d-flex flex-column align-items-center col-5 gap-4 p-1 m-1 rounded-3">
+                        <div id="blog-cards-container" class="container d-flex flex-column align-items-center col-5 gap-4 p-1 m-1 rounded-3">
 
+                        </div>
+                    </div>
+
+                    <div id="blog-detail-view" class="blog-view container d-flex flex-column col-5 gap-4 p-1 m-1 rounded-3">
+                        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+                            <button id="back-to-list-btn" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> 返回
+                            </button>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center justify-content-center m-0">
+                            <h1 id="blog-detail-title" class="blog-title mb-0"></h1>
+                        </div>
+
+                        <hr class="m-0">
+
+                        <div id="blog-detail-content" class="markdown-content">
+
+                        </div>
                     </div>
 
                 </div>
@@ -111,9 +131,6 @@
 
         </div>
 
-        <div>
-
-        </div>
     </section>
 
     <section id="body-home-bottom-readme" class="page container-fluid d-flex w-100 py-4">

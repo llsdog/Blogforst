@@ -1,12 +1,35 @@
-import {marked} from 'marked';
-import * as bootstrap from 'bootstrap';
+import markdownit from 'markdown-it';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/color-brewer.css'
+
+
 
 export class BlogManager {
     constructor() {
         this.blogs = [];
         this.blogCache = new Map();
+        this.currentView = 'list';
 
-        //Create Blog List
+        // set up markdownit
+        this.md = markdownit({
+            html: true,
+            xhtmlOut: true,
+            breaks: true,
+            linkify: true,
+            typographer: true,
+            highlight: function (str, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return '<pre class="hljs"><code>' +
+                            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+                            '</code></pre>';
+                    } catch (__) {}
+                    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+                }
+            }
+        });
+
+        // Create Blog List
         this.blogList = [
             'blog_1',
             'blog_1'
@@ -74,6 +97,7 @@ export class BlogManager {
 
             const content = await response.text();
             const { metadata, content: markdownContent } = this.parseFrontMatter(content);
+            const processedContent = this.processImagePaths(markdownContent, filename);
 
             if (!metadata.image) {
                 metadata.image = `./public/blog/${filename}/${filename}_img1.jpg`;
@@ -83,7 +107,7 @@ export class BlogManager {
                 filename,
                 metadata,
                 content: markdownContent,
-                htmlContent: marked(markdownContent)
+                htmlContent: this.md.render(processedContent)
             };
 
             this.blogCache.set(filename, blog);
@@ -93,6 +117,14 @@ export class BlogManager {
             console.error(`Load blog file failed: ${filename} with:`, error);
             return null;
         }
+    }
+
+    processImagePaths(content, filename) {
+        return content.replace(/!\[(.*?)]\((\.\/.*?)\)/g, (match, alt, src) => {
+            // Convert a relative path to an absolute path
+            const newSrc = `./public/blog/${filename}/${src.replace('./', '')}`;
+            return `![${alt}](${newSrc})`;
+        })
     }
 
     // Load all blogs
@@ -180,10 +212,74 @@ export class BlogManager {
     getBlogByFilename(filename) {
         return this.blogs.find(blog => blog.filename === filename);
     }
+
+    // Switch to detail view
+    switchToDetailView(blog) {
+        const listView = document.getElementById("blog-list-view");
+        const detailView = document.getElementById('blog-detail-view');
+
+        if (!listView || !detailView) {
+            console.error('Blog views not found');
+            return;
+        }
+
+        //switch views
+        listView.classList.remove('active');
+        detailView.classList.add('active');
+
+        //update URL
+        const newUrl = `${window.location.origin}${window.location.pathname}?blog=${blog.filename}`;
+        window.history.pushState({blog: blog.filename}, '', newUrl);
+
+        // Render blog detail
+        this.renderBlogDetail(blog);
+    }
+
+    // switch back to list view
+    switchToListView() {
+        const listView = document.getElementById('blog-list-view');
+        const detailView = document.getElementById('blog-detail-view');
+
+        if (!listView || !detailView) {
+            console.error('Blog views not found');
+            return;
+        }
+
+        //update URL
+        const newUrl = `${window.location.origin}${window.location.pathname}`;
+        window.history.pushState({}, '', newUrl);
+
+        //switch views
+        detailView.classList.remove('active');
+        listView.classList.add('active');
+    }
+
+    renderBlogDetail(blog) {
+        const titleElement = document.getElementById('blog-detail-title');
+        const contentElement = document.getElementById('blog-detail-content');
+
+        if (titleElement && contentElement) {
+            titleElement.textContent = blog.metadata.title || 'No Title';
+            contentElement.innerHTML = blog.htmlContent;
+        }
+    }
+
+    handlePopState(event) {
+        if (event.state && event.state.blog) {
+            const blog = this.getBlogByFilename(event.state.blog);
+            if (blog) {
+                this.switchToDetailView(blog);
+            } else {
+                this.switchToListView();
+            }
+        } else {
+            this.switchToListView();
+        }
+    }
 }
 
 // Create an instance of BlogManager
-const blogManager = new BlogManager();
+export const blogManager = new BlogManager();
 
 // Initialize blogs
 export async function initBlogs() {
@@ -191,10 +287,17 @@ export async function initBlogs() {
         console.log("Initializing blogs...");
         await blogManager.loadAllBlogs();
 
+        //init active view
+        const listView = document.getElementById('blog-list-view');
+        const detailView = document.getElementById('blog-detail-view');
+
+        if (listView && detailView) {
+            listView.classList.add('active');
+            detailView.classList.remove('active');
+        }
+
         // Render blog cards in the container
         const blogContainer = document.getElementById('blog-cards-container');
-        console.log("Blog container found");
-
         if (blogContainer) {
             blogManager.renderBlogCards(blogContainer);
         } else {
@@ -202,7 +305,7 @@ export async function initBlogs() {
         }
 
         // Add click event listener to blog cards
-        addBlogCardClickEvents();
+        setupEventListeners();
 
     } catch (error) {
         console.error('Failed to initialize blogs:', error);
@@ -210,48 +313,24 @@ export async function initBlogs() {
 }
 
 // Add click event listeners to blog cards
-function addBlogCardClickEvents() {
-    setTimeout(() => {
-        const blogCards = document.querySelectorAll('[data-blog]');
-        console.log('Adding click events to blog cards:', blogCards.length);
+function setupEventListeners() {
+    document.getElementById('blog-cards-container').addEventListener('click', (e) => {
+        const card = e.target.closest('[data-blog]');
+        if (card) {
+            const filename = card.dataset.blog;
+            const blog = blogManager.getBlogByFilename(filename);
+            if (blog) blogManager.switchToDetailView(blog);
+        }
+    });
 
-        blogCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                const filename = card.dataset.blog;
-                openBlogDetail(filename);
-            });
-        });
-    }, 100);
+    const backButton = document.getElementById('back-to-list-btn');
+    backButton?.addEventListener('click', () => blogManager.switchToListView());
 }
 
-function openBlogDetail(filename) {
-    const blog = blogManager.getBlogByFilename(filename);
-    if (blog) {
-       //Create a new page for the blog detail
-        console.log('Open Blog:', blog.metadata.title)
-        showBlogModal(blog);
-    }
-}
 
-// Show blog modal
-function showBlogModal(blog) {
-    const modal = `
-        <div>
-            
-        </div>
-    `;
 
-    const existingModal = document.getElementById('blogModal');
-    if (existingModal) {
-        existingModal.remove();
-    }
 
-    //Add new modal
-    document.body.insertAdjacentHTML('beforeend', modal);
 
-    //Show the modal
-    const modalBs = new bootstrap.Modal(document.getElementById('blogModal'));
-    modalBs.show();
-}
+
 
 
