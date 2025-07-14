@@ -1,7 +1,7 @@
 ---
 title: "README.md"
 author: "llsdog"
-date: "2025-7-8"
+date: "2025-07-08"
 description: "关于Blogforst"
 image: "./public/blog/blog_1/blog_1_img1.jpg"
 tags: ["Test", "Amiya"]

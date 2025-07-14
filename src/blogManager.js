@@ -32,7 +32,7 @@ export class BlogManager {
         // Create Blog List
         this.blogList = [
             'blog_1',
-            'blog_1'
+            'blog_2'
         ];
     }
 
@@ -173,7 +173,7 @@ export class BlogManager {
         } = metadata;
 
         return `
-            <article class="blog-small-card blog-post rounded-4 border border-2 border-dark p-3 position-relative" data-blog="${blog.filename}">
+            <article class="blog-small-card-effect blog-post rounded-4 border border-2 border-dark p-3 position-relative" data-blog="${blog.filename}">
                 <div class="blog-post-div d-inline-block float-start">
                     <img class="blog-post-div-img img-fluid" src="${image}" alt="${title}" loading="lazy">
                 </div>
@@ -188,10 +188,10 @@ export class BlogManager {
                     </span>
                     
                     <div class="blog-post-box d-flex flex-row align-items-center m-1">
-                        <i class="blog-i bi bi-at p-1">${author}</i>
-                        <i class="blog-i bi bi-clock-fill p-2">${this.formatDate(date)}</i>
-                        <i class="blog-i bi bi-person-wheelchair p-2">?</i>
-                        <i class="blog-i bi bi-chat-dots-fill p-2">${comments}</i>
+                        <i class="blog-i bi bi-at m-1">${author}</i>
+                        <i class="blog-i bi bi-clock-fill m-2">${this.formatDate(date)}</i>
+                        <i class="blog-i bi bi-person-fill m-2">?</i>
+                        <i class="blog-i bi bi-chat-dots-fill m-2">${comments}</i>
                     </div>
                 </div>
             </article>
