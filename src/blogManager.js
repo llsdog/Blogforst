@@ -1,7 +1,7 @@
 import markdownit from 'markdown-it';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/color-brewer.css'
-
+import {config} from "./config.js";
 
 
 export class BlogManager {
@@ -30,10 +30,7 @@ export class BlogManager {
         });
 
         // Create Blog List
-        this.blogList = [
-            'blog_1',
-            'blog_2'
-        ];
+        this.blogList = config.blogList
     }
 
     // Read out Front Matter
