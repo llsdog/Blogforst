@@ -24,6 +24,24 @@ export const config = {
 }   
 ````
 
+## How to choose your cloudmusic playlist
+1.Add it to "Blogforst/scr/config.js"
+
+2.Just like this
+```javascript
+export const config = {
+    github: {
+        token: 'Your_Github_PAT',
+        username : 'Your_Github_Name'
+    },
+
+    cloudmusic: {
+        baseURL: 'CloudMusic_API',
+        listid: 'Your_CloudMuisc_Listid' 
+    }
+}
+```
+
 ## How to customize your SnowEffect
 
 ### In Blogforst/src/main.js
