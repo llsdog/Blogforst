@@ -6,7 +6,8 @@
 }
 
 .page {
-    display: none;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .page.active {
@@ -220,7 +221,14 @@
     display: flex !important;
 }
 
+.page,
+#body-home-top {
+    will-change: transform, opacity;
+}
 
+#body-home {
+    perspective: 1000px;
+}
 
 #back-to-list-btn {
     border: none;

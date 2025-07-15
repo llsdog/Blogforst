@@ -7,53 +7,8 @@ import { getRecentActivities } from "./githubActivityManager.js";
 import { initBlogs, blogManager } from "./blogManager.js";
 import SnowEffect from "./snowEffect.js";
 import { SimpleRandomMusicPlayer, MusicPlayButton } from './musicPlayer.js';
+import switchPage from './switchPage.js';
 
-
-//Page switch function
-function showPage(pageId, methodName) {
-    //remove 'active' class from all pages
-    const allPages = document.querySelectorAll('.page');
-    allPages.forEach(page => {
-        page.classList.remove('active');
-    });
-
-    //add 'active' class to the target page
-    const bodyHomeTop = document.querySelector("#body-home-top");
-    const targetPage = document.getElementById(pageId);
-    if (pageId === 'body-home-bottom-mainpage') {
-        if (methodName === 'load') {
-            bodyHomeTop.classList.remove('page-background-sun');
-            bodyHomeTop.classList.add('page-background-moon');
-            return;
-        }
-        gsap.to(bodyHomeTop, {
-            x: 100,
-            duration: 0.5,
-            onComplete: () => {
-                bodyHomeTop.classList.remove('page-background-sun');
-                bodyHomeTop.classList.add('page-background-moon');
-                targetPage.classList.add('active');
-                gsap.to(bodyHomeTop, {x: 0, duration: 0.5});
-            }
-        });
-    } else if (pageId === 'body-home-bottom-readme') {
-        if (methodName === 'load') {
-            bodyHomeTop.classList.remove('page-background-moon');
-            bodyHomeTop.classList.add('page-background-sun');
-            return;
-        }
-        gsap.to(bodyHomeTop, {
-            x: -100,
-            duration: 0.5,
-            onComplete: () => {
-                bodyHomeTop.classList.remove('page-background-moon');
-                bodyHomeTop.classList.add('page-background-sun');
-                targetPage.classList.add('active');
-                gsap.to(bodyHomeTop, {x: 0, duration: 0.5});
-            }
-        });
-    }
-}
 
 function handleInitialUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -99,7 +54,6 @@ fetch('/hitokoto')
 
 // 页面加载完成后显示主页
 document.addEventListener('DOMContentLoaded', async function () {
-    showPage('body-home-bottom-mainpage', 'load');
     getRecentActivities(); //获取最近的活动
     initBlogs().then(() => {
         handleInitialUrl(); //处理初始URL
