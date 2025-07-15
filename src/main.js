@@ -118,9 +118,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         zIndex: 999               // 层级
     });
     const musicPlayer = new SimpleRandomMusicPlayer({
-        baseUrl: 'http://localhost:3000',
         volume: 0.2,
-        playlistId: '13980777585'
     });
     await musicPlayer.init();
 

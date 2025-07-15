@@ -1,7 +1,9 @@
+import {config} from "./config.js";
+
 class SimpleRandomMusicPlayer {
     constructor(options = {}) {
-        this.baseUrl = options.baseUrl || 'http://localhost:3000';
-        this.playlistId = options.playlistId || null;
+        this.baseUrl = config.cloudmusic.baseURL;
+        this.playlistId = config.cloudmusic.listid;
         this.playlist = [];
         this.currentSong = null;
         this.isPlaying = false;
