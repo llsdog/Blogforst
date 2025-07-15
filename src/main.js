@@ -61,16 +61,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.addEventListener('popstate', (event) => {
         blogManager.handlePopState(event);
     });
-    SnowEffect.start({
-        maxSnowflakes: 250,        // 最大雪花数量
-        snowflakeColor: '#ffffff', // 雪花颜色
-        minSize: 3,                // 最小尺寸
-        maxSize: 10,                // 最大尺寸
-        minSpeed: 0.2,             // 最小速度
-        maxSpeed: 2,               // 最大速度
-        wind: 0.2,                 // 风力强度
-        zIndex: 999               // 层级
-    });
+    SnowEffect.start();
     const musicPlayer = new SimpleRandomMusicPlayer({
         volume: 0.2,
     });

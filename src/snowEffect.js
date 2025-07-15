@@ -1,15 +1,16 @@
+import {config} from "./config.js";
+
 class SnowEffect {
-    constructor(options = {}) {
+    constructor() {
         this.options = {
-            maxSnowflakes: options.maxSnowflakes || 100,
-            snowflakeColor: options.snowflakeColor || 'white',
-            minSize: options.minSize || 3,
-            maxSize: options.maxSize || 8,
-            minSpeed: options.minSpeed || 1,
-            maxSpeed: options.maxSpeed || 3,
-            wind: options.wind || 0.5,
-            zIndex: options.zIndex || 9999,
-            ...options
+            maxSnowflakes: config.snowstyle.maxSnowflakes || 100,
+            snowflakeColor: config.snowstyle.snowflakeColor || 'white',
+            minSize: config.snowstyle.minSize || 3,
+            maxSize: config.snowstyle.maxSize || 8,
+            minSpeed: config.snowstyle.minSpeed || 1,
+            maxSpeed: config.snowstyle.maxSpeed || 3,
+            wind: config.snowstyle.wind || 0.5,
+            zIndex: config.snowstyle.zIndex || 9999,
         };
 
         this.snowflakes = [];
