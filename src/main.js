@@ -6,6 +6,7 @@ import './index.css';
 import { getRecentActivities } from "./githubActivityManager.js";
 import { initBlogs, blogManager } from "./blogManager.js";
 import SnowEffect from "./snowEffect.js";
+import { SimpleRandomMusicPlayer, MusicPlayButton } from './musicPlayer.js';
 
 
 //Page switch function
@@ -97,7 +98,7 @@ fetch('/hitokoto')
     .catch(console.error);
 
 // 页面加载完成后显示主页
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     showPage('body-home-bottom-mainpage', 'load');
     getRecentActivities(); //获取最近的活动
     initBlogs().then(() => {
@@ -115,6 +116,17 @@ document.addEventListener('DOMContentLoaded', function () {
         maxSpeed: 2,               // 最大速度
         wind: 0.2,                 // 风力强度
         zIndex: 999               // 层级
+    });
+    const musicPlayer = new SimpleRandomMusicPlayer({
+        baseUrl: 'http://localhost:3000',
+        volume: 0.2,
+        playlistId: '13980777585'
+    });
+    await musicPlayer.init();
+
+    // 创建播放按钮
+    const playButton = new MusicPlayButton('#music-button-container', musicPlayer, {
+        showVolume: true,
     });
     console.log("加载成功, 欢迎来到我的Blog");
 });

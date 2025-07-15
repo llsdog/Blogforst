@@ -113,6 +113,10 @@
     font-size: xx-small;
 }
 
+.blog-fontstyle{
+    font-family: STKaiti, serif;
+}
+
 .gradient-text {
     background: linear-gradient(to right,
     #000000, #000000) no-repeat right bottom;
