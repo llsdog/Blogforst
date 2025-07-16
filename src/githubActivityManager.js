@@ -104,8 +104,12 @@ function renderActivities(activities) {
         <div class="blog-small-card-effect blog-post-w d-flex flex-row align-items-center me-auto rounded-3 m-2 col-14" style="animation-delay: ${index * 0.1}s">
              <i class="fa-solid ${getTypeIcon(activity.type)} m-3" style="font-size: 150%"></i>
              <div class="d-flex flex-column m-2">
-                  <span class="gradient-text m-1" style="font-size: 80%"> ${formatTypeName(activity.type)}${activity.repo} </span>
-                  <span class="gradient-text m-1" style="font-size: 60%"> "${activity.message}" </span>
+                  <div class="d-flex flex-row">  
+                      <span class="gradient-text m-1" style="font-size: 80%"> ${formatTypeName(activity.type)}${activity.repo} </span>
+                  </div>
+                  <div class="d-flex flex-row">
+                      <span class="gradient-text m-1" style="font-size: 60%"> "${activity.message}" </span>
+                  </div>
                   <div class="d-flex flex-row">
                       <i class="bi bi-clock-fill m-1" style="font-size: 60%"></i>
                       <span class="gradient-text m-1" style="font-size: 60%">${activity.timeAgo}</span>
