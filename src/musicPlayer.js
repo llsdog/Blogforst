@@ -2,7 +2,7 @@ import {config} from "./config.js";
 
 class SimpleRandomMusicPlayer {
     constructor(options = {}) {
-        this.baseUrl = config.cloudmusic.baseURL;
+        this.apiURL = config.api.url;
         this.playlistId = config.cloudmusic.listid;
         this.playlist = [];
         this.currentSong = null;
@@ -80,7 +80,7 @@ class SimpleRandomMusicPlayer {
 
     async loadPlaylist() {
         try {
-            const response = await fetch(`${this.baseUrl}/playlist/track/all?id=${this.playlistId}`);
+            const response = await fetch(`${this.apiURL}/api/music/playlist/${this.playlistId}`);
             const data = await response.json();
 
             if (data.code === 200) {
@@ -106,7 +106,7 @@ class SimpleRandomMusicPlayer {
 
     async getSongUrl(songId) {
         try {
-            const response = await fetch(`${this.baseUrl}/song/url?id=${songId}`);
+            const response = await fetch(`${this.apiURL}/api/music/song-url/${songId}`);
             const data = await response.json();
 
             if (data.code === 200 && data.data[0]) {

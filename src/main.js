@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import gsap from "gsap";
 import './index.css';
 import { getRecentActivities } from "./githubActivityManager.js";
 import { initBlogs, blogManager } from "./blogManager.js";
