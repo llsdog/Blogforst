@@ -1,26 +1,5 @@
 import { config } from "./config.js";
 
-//get and process the first five activities on GitHub.
-export async function getRecentActivities() {
-    const apiURL = config.api.url;
-
-    try {
-        // Get user's Info
-        const eventsResponse = await fetch(`${apiURL}/api/github/activities`);
-
-        if(!eventsResponse.ok) throw new Error('Failed to fetch user data');
-        else console.log("Get userResponse successfully");
-
-        const events = await eventsResponse.json();
-
-        renderActivities(events);
-
-    } catch (error) {
-        console.error('request failed:', error);
-    }
-}
-
-
 //function to render activities
 function renderActivities(activities) {
     const container = document.getElementById('activity-cards');
@@ -71,4 +50,82 @@ function formatTypeName(type) {
         'DeleteEvent': '删除了 '
     }
     return names[type] || type;
+}
+
+class GitHubActivityManager {
+    constructor() {
+        this.pollingInterval = null;
+        this.pollingDelay = 60000; // 30秒轮询一次
+        this.isPolling = false;
+    }
+
+    async getRecentActivities() {
+        const apiURL = config.api.url;
+
+        try {
+            const eventsResponse = await fetch(`${apiURL}/api/github/activities`);
+
+            if(!eventsResponse.ok) throw new Error('Failed to fetch user data');
+            else console.log("Get userResponse successfully");
+
+            const events = await eventsResponse.json();
+            renderActivities(events);
+
+        } catch (error) {
+            console.error('request failed:', error);
+        }
+    }
+
+    startPolling(delay = this.pollingDelay) {
+        if (this.isPolling) {
+            console.log('轮询已在进行中');
+            return;
+        }
+
+        this.isPolling = true;
+        this.pollingDelay = delay;
+
+        // 立即执行一次
+        this.getRecentActivities();
+
+        // 设置定时轮询
+        this.pollingInterval = setInterval(() => {
+            this.getRecentActivities();
+            console.log('轮询更新GitHub活动');
+        }, this.pollingDelay);
+
+        console.log(`GitHub活动轮询已启动，间隔：${delay}ms`);
+    }
+
+    stopPolling() {
+        if (this.pollingInterval) {
+            clearInterval(this.pollingInterval);
+            this.pollingInterval = null;
+            this.isPolling = false;
+            console.log('GitHub活动轮询已停止');
+        }
+    }
+
+    changePollingInterval(delay) {
+        if (this.isPolling) {
+            this.stopPolling();
+            this.startPolling(delay);
+        } else {
+            this.pollingDelay = delay;
+        }
+    }
+}
+
+const githubActivityManager = new GitHubActivityManager();
+
+export async function getRecentActivities() {
+    return await githubActivityManager.getRecentActivities();
+}
+
+export function startActivityPolling(delay) {
+    return githubActivityManager.startPolling(delay);
+}
+
+export function stopActivityPolling() {
+    return githubActivityManager.stopPolling();
 }

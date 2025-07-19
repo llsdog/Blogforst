@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './index.css';
-import { getRecentActivities } from "./githubActivityManager.js";
+import {getRecentActivities, startActivityPolling, stopActivityPolling} from "./githubActivityManager.js";
 import { initBlogs, blogManager } from "./blogManager.js";
 import SnowEffect from "./snowEffect.js";
 import { SimpleRandomMusicPlayer, MusicPlayButton } from './musicPlayer.js';
@@ -53,25 +53,33 @@ fetch('/hitokoto')
 
 // 页面加载完成后显示主页
 document.addEventListener('DOMContentLoaded', async function () {
-    getRecentActivities(); //获取最近的活动
+    await getRecentActivities();
+    startActivityPolling(60000);
+
     initBlogs().then(() => {
         handleInitialUrl(); //处理初始URL
     }); //Init Blog
+
     window.addEventListener('popstate', (event) => {
         blogManager.handlePopState(event);
     });
+
     SnowEffect.start();
+
     const musicPlayer = new SimpleRandomMusicPlayer({
         volume: 0.2,
     });
+
     await musicPlayer.init();
 
-    // 创建播放按钮
     const playButton = new MusicPlayButton('#music-button-container', musicPlayer, {
         showVolume: true,
     });
     console.log("加载成功, 欢迎来到我的Blog");
 });
 
+window.addEventListener('beforeunload', () => {
+    stopActivityPolling();
+});
 
 
