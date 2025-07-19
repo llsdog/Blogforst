@@ -10,7 +10,9 @@ export default defineConfig({
             input: {
                 main: './index.html'
             }
-        }
+        },
+        publicDir: 'public',
+        assetsInlineLimit: 0
     },
     server: {
         port: 4000,

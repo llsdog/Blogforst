@@ -85,7 +85,7 @@ export class BlogManager {
         }
 
         try {
-            const response = await fetch(`./public/blog/${filename}/${filename}.md`);
+            const response = await fetch(`${config.paths.blogBase}/${filename}/${filename}.md`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             } else {
@@ -172,7 +172,7 @@ export class BlogManager {
         return `
             <article class="blog-small-card-effect blog-post rounded-4 border border-2 border-dark p-3 position-relative" data-blog="${blog.filename}">
                 <div class="blog-post-div d-inline-block float-start">
-                    <img class="blog-post-div-img img-fluid" src="${image}" alt="${title}" loading="lazy">
+                    <img class="blog-post-div-img img-fluid" src="/${image.replace('./', '')}" alt="${title}" loading="lazy">
                 </div>
                 
                 <div class="d-flex flex-column p-1">
