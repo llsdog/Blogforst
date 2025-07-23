@@ -3,7 +3,7 @@ title: "README.md"
 author: "llsdog"
 date: "2025-07-08"
 description: "关于Blogforst"
-image: "./public/blog/blog_1/blog_1_img1.jpg"
+image: "/blog/blog_1/blog_1_img1.jpg"
 tags: ["Test", "Amiya"]
 comments: 0
 ---
@@ -26,7 +26,7 @@ comments: 0
 此项目没有太大的开源的开源价值, 为个人学习使用, 详情请看开源许可证
 
 ## How to get your own github activities in Blog
-1.Creat "Blogforst/scr/config.js"
+1.Creat "Blogforst/scr/config.ts"
 
 2.Write like this:
 ````javascript
@@ -39,7 +39,7 @@ export const config = {
 ````
 
 ## How to choose your cloudmusic playlist
-1.Add it to "Blogforst/scr/config.js"
+1.Add it to "Blogforst/scr/config.ts"
 
 2.Just like this
 ```javascript
