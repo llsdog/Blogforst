@@ -16,40 +16,37 @@
 npm install
 ```
 
-
-2.Creat "Blogforst/scr/config.js"
+2.Creat "Blogforst/.env.local"
 
 ### Write like this:
-```javascript
-export const config = {
-    api: {
-        url: 'Your_Blogforst_API_URL'
-    },
+```env
+# 网站配置
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-    cloudmusic: {
-        listid: 'Your_Musiclist_Id' ,
-    },
+# GitHub配置
+NEXT_PUBLIC_GITHUB_USERNAME=Your_Github_Name
+GITHUB_TOKEN=Your_Github_Token
 
-    blogList: [
-        //blog's name in public/blog
-        'blog_1',
-        'blog_2'
-    ],
+# 网易云音乐配置
+NEXT_PUBLIC_CLOUDMUSIC_BASE_URL=Neteasecloudmusicapi_URL
+NEXT_PUBLIC_CLOUDMUSIC_PLAYLIST_ID=Your_Playlist_Id
 
-    snowstyle: {
-        maxSnowflakes: 150,        // max number of snowflakes
-        snowflakeColor: '#ffffff', // snowflakes's color
-        minSize: 2,                // min size
-        maxSize: 6,                // max size
-        minSpeed: 0.5,             // min speed of snowflakes
-        maxSpeed: 2,               // max speed of snowflakes
-        wind: 0.3,                 // wind force intensity
-        zIndex: 9999               // Z-index
-    }
-} 
+# 雪花效果配置
+NEXT_PUBLIC_SNOW_MAX_FLAKES=150
+NEXT_PUBLIC_SNOW_COLOR=white
+NEXT_PUBLIC_SNOW_MIN_SIZE=3
+NEXT_PUBLIC_SNOW_MAX_SIZE=8
+NEXT_PUBLIC_SNOW_MIN_SPEED=0.5
+NEXT_PUBLIC_SNOW_MAX_SPEED=2
+NEXT_PUBLIC_SNOW_WIND=0.3
+NEXT_PUBLIC_SNOW_Z_INDEX=9999
+
+# 端口
+PORT=3000
+
 ```
 
 3.Run
 ```bash
-vite dev
+npm run dev
 ```
