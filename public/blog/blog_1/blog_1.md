@@ -1,96 +1,235 @@
 ---
-title: "README.md"
+title: "如何使用Markdown"
 author: "llsdog"
-date: "2025-07-08"
-description: "关于Blogforst"
+date: "2025-07-24"
+description: "关于Markdown"
 image: "/blog/blog_1/blog_1_img1.jpg"
-tags: ["Test", "Amiya"]
+tags: ["Markdown", "Learn"]
 comments: 0
 ---
 
-# 关于Blogforst
 
-![Crazy Amiya](./blog_1_img1.jpg)
+# Markdown标记语言
 
-# Blogforst
-## 一个从零开始的开源博客网站
-### 该项目从原生的前端框架开始
-### 在我学习前端的过程中将会不断
-1. **逐步完善网站**
-2. **优化目录结构**
-3. **引入更多开源库**
-4. **尝试从原生转至更加现代化的开发方式**
+![Markdown](./blog_1_img1.jpg)
 
-***欢迎创建分支来和我一起学习前端***
+## 这是什么?
+**一种可以代替手写的语言格式,通过使用规定好的符号来格式化文字,从而让文字拥有各种样式,就是类似于Word里的那种效果(本篇文章也是使用Markdown格式编写),但是可以用纯文本形式编写,然后再直接渲染就行啦**  
+*Markdown兼容Html语法(Markdown是Html的子集),本文未提到的样式可使用Html语法写出*
 
-此项目没有太大的开源的开源价值, 为个人学习使用, 详情请看开源许可证
+## 有哪些形式(常用)?
 
-## How to get your own github activities in Blog
-1.Creat "Blogforst/scr/config.ts"
+#### 1. 标题
+* H1一级标题
 
-2.Write like this:
-````javascript
-export const config = {
-    github: {
-        token: 'Your_Github_PAT',
-        username : 'Your_Github_Name'
-    }
-}   
-````
-
-## How to choose your cloudmusic playlist
-1.Add it to "Blogforst/scr/config.ts"
-
-2.Just like this
-```javascript
-export const config = {
-    github: {
-        token: 'Your_Github_PAT',
-        username : 'Your_Github_Name'
-    },
-
-    cloudmusic: {
-        baseURL: 'CloudMusic_API',
-        listid: 'Your_CloudMuisc_Listid' 
-    }
-}
+```
+# H1一级标题
 ```
 
-## How to customize your SnowEffect
+# H1一级标题
 
-### In Blogforst/src/main.js
-```javascript
-SnowEffect.start({
-    maxSnowflakes: 150,        // max number of snowflakes
-    snowflakeColor: '#ffffff', // snowflakes's color
-    minSize: 2,                // min size
-    maxSize: 6,                // max size
-    minSpeed: 0.5,             // min speed of snowflakes
-    maxSpeed: 2,               // max speed of snowflakes
-    wind: 0.3,                 // wind force intensity
-    zIndex: 9999               // Z-index
-});
+* H6六级标题
+
 ```
-### Other method
-```javascript
-// stop effect
-SnowEffect.stop();
-
-// restart
-SnowEffect.start();
-
-// clear snowflakes
-SnowEffect.destroy();
-
-// change midway
-SnowEffect.setOptions({
-    maxSnowflakes: 200,
-    snowflakeColor: '#87CEEB'
-});
+###### H6六级标题
 ```
 
-## More Information
+###### H6六级标题
 
-Amiya is my wife, and she is adorable. I love her so much.
+**通过增减#号就可以获得不同大小的标题了(#号与标题之间需要存在一个空格哦)**
+
+#### 2. 正文文本格式
+* **字体**
+
+```
+*斜体*  _斜体_
+**粗体**  __粗体__
+***粗斜体***  ___粗斜体___
+```
+
+*斜体*  _斜体_
+**粗体**  __粗体__
+***粗斜体***  ___粗斜体___
+
+* **分割线**
+
+```
+***
+* * *
+*****
+_ _ _
+_ _ _ _ _ _ _
+以及其他各种写法
+```
+
+***
+* * *
+*****
+_ _ _
+_ _ _ _ _ _ _
+以及其他各种写法
+
+* **下划与删除线**
+
+```
+<u>下划线</u>
+~~删除线~~
+```
+
+<u> 下划线 </u>(这条使用Html语法)
+~~删除线~~
+
+* **脚注**
+
+```
+[^脚注]:脚注内容
+```
+
+[^脚注]: 脚注内容
+
+* **行内代码与代码块**
+
+```
+行内代码`console.log("JS是世界上最好和最孬的语言");`
+
+3个`
+printf("C语言是其他语言严厉的父亲");
+3个`
+
+3个`cpp
+std::cout << "离运行效率很近,离开发效率很远了";
+3个`
+```
+
+行内代码`console.log("JS是世界上最好和最孬的语言");`
+```
+printf("C语言是其他语言严厉的父亲");
+```
+
+```cpp
+std::cout << "离运行效率很近,离开发效率很远了";
+```
+
+* **有序列表和无序列表**
+
+```
+* 无序1
+* 无序2
+* 无序3
+
+1. 有序1
+2. 有序2
+3. 有序3
+```
+
+* 无序1
+* 无序2
+* 无序3
+
+1. 有序1
+2. 有序2
+3. 有序3
+
+* **任务列表(部分支持)**
+
+```
+- [x] 打会明日方舟
+- [] 打会火影忍者
+```
+
+- [x] 打会明日方舟
+- [] 打会火影忍者
+
+* **引用块**
+
+```
+> 长引用, 你说你不想在这里
+我也不想在这里
+
+> 多行引用
+> 你说得对
+> 但是Markdown是一款由
+
+> 多级引用
+> > 食人树
+> > > 设交的手腕
+```
+
+> 长引用, 你说你不想在这里
+我也不想在这里
+
+> 多行引用
+> 你说得对
+> 但是Markdown是一款由
+
+> 多级引用
+> > 食人树
+> > > 设交的手腕
+
+* **表格**
+
+```
+| 干员 | 弑君者 | 傀影 |
+| :-----| ----: | :----: |
+| 基础面板 | 1200 | 1200 |
+| 总伤 | 114000 | 100514 |
+```
+
+| 干员 | 弑君者 | 傀影 |
+| :-----| ----: | :----: |
+| 基础面板 | 1200 | 1200 |
+| 总伤 | 114000 | 100514 |
+
+* **一些其他的语法**
+    * 高亮文本(部分支持)
+  ```
+  ==来,小亮,给他整个活==
+  ```
+  ==来,小亮,给他整个活==
+
+    * 换行
+  ```
+  第一行<br>
+  第二行
+  
+  第一行  
+  (空一行)
+  第二行
+  ```
+  第一行<br>
+  第二行
+
+  第一行
+  第二行
+
+
+#### 3. 链接
+
+* **普通链接**
+```
+点此开玩 [塞尔达](https://www.yuanshen.com/)
+```
+
+点此开玩 [塞尔达](https://www.yuanshen.com/)
+
+* **图片链接**
+```
+![令人脸红心跳的图片](https://imgse.com/i/pVJEGVI)
+```
+
+![令人脸红心跳的图片](https://s21.ax1x.com/2025/07/24/pVJEGVI.jpg)
+
+#### 4. 更多
+
+* **思维导图**
+  *现在某些Markdown拓展支持生成思维导图,如需使用可自行搜索*
+
+* **图表**
+  *图表是Markdown的高级功能之一, 如需了解可查看 [Markdown图表](https://www.runoob.com/markdown/md-draw.html)*
+
+* **数学公式**
+  *Markdown支持使用LaTeX格式渲染数学公式, 数院的佬们请查看 [Markdown数学公式](https://www.runoob.com/markdown/md-math.html)*
+
+
 
 
