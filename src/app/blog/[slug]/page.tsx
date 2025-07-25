@@ -1,16 +1,26 @@
-import { SnowEffect } from '@/components/SnowEffect';
-import { BlogCard } from '@/components/BlogCard';
-import { GitHubActivity } from '@/components/GitHubActivity';
-import { MusicPlayer } from '@/components/MusicPlayer';
-import { blogConfig } from '@/lib/config';
-import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { SnowEffect } from '@/components/SnowEffect';
+import { MusicPlayer } from '@/components/MusicPlayer';
+import { GitHubActivity } from '@/components/GitHubActivity';
+import { blogConfig } from '@/lib/config';
+import MarkdownIt from 'markdown-it';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/color-brewer.css';
 import type { BlogPost, BlogMetadata } from '@/types';
 import fs from 'fs/promises';
 import path from 'path';
-import { HitokotoCard } from '@/components/HitokotoCard';
 
-// 解析 Markdown 前置信息的服务器端函数
+// 为 SSG 生成静态参数
+export async function generateStaticParams() {
+    return blogConfig.blogList.map((filename) => ({
+        slug: filename,
+    }));
+}
+
+// 解析 Markdown 前置信息
 function parseFrontMatter(content: string): { metadata: BlogMetadata; content: string } {
     const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
     const match = content.match(frontMatterRegex);
@@ -63,48 +73,94 @@ function parseFrontMatter(content: string): { metadata: BlogMetadata; content: s
     };
 }
 
-// 加载所有博客的服务器端函数
-async function loadAllBlogs(): Promise<BlogPost[]> {
-    const blogs: BlogPost[] = [];
-    
-    for (const filename of blogConfig.blogList) {
-        try {
-            const filePath = path.join(process.cwd(), 'public', 'blog', filename, `${filename}.md`);
-            const content = await fs.readFile(filePath, 'utf-8');
-            
-            const { metadata } = parseFrontMatter(content);
-            
-            if (!metadata.image) {
-                metadata.image = `/blog/${filename}/${filename}_img1.jpg`;
-            }
-            
-            // 在服务器端格式化日期
-            if (metadata.date) {
-                const date = new Date(metadata.date);
-                metadata.formattedDate = date.toLocaleDateString('zh-CN', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            }
-            
-            blogs.push({
-                filename,
-                metadata,
-                content: '', // 主页不需要完整内容
-                htmlContent: '' // 主页不需要渲染的HTML
-            });
-        } catch (error) {
-            console.error(`Failed to load blog file: ${filename}`, error);
-        }
-    }
-    
-    // 按日期排序
-    blogs.sort((a, b) => new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime());
-    
-    return blogs;
+// 处理图片路径
+function processImagePaths(content: string, filename: string): string {
+    return content.replace(/!\[(.*?)]\((\.\/.*?)\)/g, (match, alt, src) => {
+        const newSrc = `/blog/${filename}/${src.replace('./', '')}`;
+        return `![${alt}](${newSrc})`;
+    });
 }
 
+// 加载单个博客文件
+async function loadBlogFile(filename: string): Promise<BlogPost | null> {
+    try {
+        const filePath = path.join(process.cwd(), 'public', 'blog', filename, `${filename}.md`);
+        const content = await fs.readFile(filePath, 'utf-8');
+        
+        const { metadata, content: markdownContent } = parseFrontMatter(content);
+        const processedContent = processImagePaths(markdownContent, filename);
+        
+        if (!metadata.image) {
+            metadata.image = `/blog/${filename}/${filename}_img1.jpg`;
+        }
+        
+        // 设置 markdown-it
+        const md = new MarkdownIt({
+            html: true,
+            xhtmlOut: true,
+            breaks: true,
+            linkify: true,
+            typographer: true,
+            highlight: function (str: string, lang: string): string {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return '<pre class="hljs"><code>' +
+                            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+                            '</code></pre>';
+                    } catch (__) {
+                        // 忽略错误
+                    }
+                }
+                return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+            }
+        });
+        
+        const blog: BlogPost = {
+            filename,
+            metadata,
+            content: markdownContent,
+            htmlContent: md.render(processedContent)
+        };
+        
+        return blog;
+    } catch (error) {
+        console.error(`Failed to load blog file: ${filename}`, error);
+        return null;
+    }
+}
+
+// 生成页面元数据
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const blog = await loadBlogFile(slug);
+    
+    if (!blog) {
+        return {
+            title: '博客未找到'
+        };
+    }
+    
+    return {
+        title: blog.metadata.title,
+        description: blog.metadata.description,
+        keywords: blog.metadata.tags,
+        authors: [{ name: blog.metadata.author }],
+        openGraph: {
+            title: blog.metadata.title,
+            description: blog.metadata.description,
+            images: blog.metadata.image ? [blog.metadata.image] : undefined,
+            type: 'article',
+            publishedTime: blog.metadata.date,
+            authors: [blog.metadata.author],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: blog.metadata.title,
+            description: blog.metadata.description,
+            images: blog.metadata.image ? [blog.metadata.image] : undefined,
+        }
+    };
+}
 
 // 格式化日期
 function formatDate(dateString: string): string {
@@ -116,16 +172,20 @@ function formatDate(dateString: string): string {
     });
 }
 
-// 主页组件（服务器组件）
-export default async function Home() {
-    const blogs = await loadAllBlogs();
+export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const blog = await loadBlogFile(slug);
+    
+    if (!blog) {
+        notFound();
+    }
     
     return (
         <>
             <SnowEffect enabled={true} />
             
             <div id="body-home" className="container-fluid p-0 position-relative">
-                {/* 上半部分 */}
+                {/* 上半部分 - 导航栏 */}
                 <div id="body-home-top" className="page-background-moon container-fluid d-flex flex-column w-100 align-items-center border-bottom-0 position-relative">
                     {/* 导航栏 */}
                     <section className="container d-flex justify-content-center" style={{ width: '25%', minWidth: '300px' }}>
@@ -151,27 +211,15 @@ export default async function Home() {
                     <section id="body-home-top-title-section" className="container custom-spacing align-items-center">
                         <div className="d-flex justify-content-center w-100">
                             <h1 className="display-5 text-center" id="body-home-top-title-title">
-                                Bonjour!欢迎来到我的Blog
+                                {blog.metadata.title}
                             </h1>
                         </div>
                     </section>
                     
-                    {/* 视频区域 */}
-                    <div className="position-relative container-fluid z-1 d-flex justify-content-center">
-                        <video className="video-webm" autoPlay muted loop>
-                            <source src="/webm/LL-front-special-x2.webm" type="video/webm" />
-                        </video>
-                        <video className="video-webm" autoPlay muted loop>
-                            <source src="/webm/LL-front-special-x1.webm" type="video/webm" />
-                        </video>
-                        <video className="video-webm" autoPlay muted loop>
-                            <source src="/webm/LL-front-Idle-x1.webm" type="video/webm" />
-                        </video>
-                    </div>
                     <div className="trapezoid position-absolute bottom-0 z-0"></div>
                 </div>
                 
-                {/* 主页面内容 */}
+                {/* 主内容区域 */}
                 <section className="container-fluid d-flex flex-column w-100 py-4">
                     <div className="row w-100 justify-content-center p-3">
                         <div className="p-2 d-flex flex-row justify-content-between">
@@ -200,38 +248,40 @@ export default async function Home() {
                                     </div>
                                 </div>
                                 
-                                {/* 公告 */}
-                                <div className="blog-small-card-effect blog-post-w d-flex flex-column ms-auto col-12 rounded-3">
-                                    <i className="bi bi-megaphone-fill float-start p-2">
-                                        <span className="blog-i p-0">Bro有话要说</span>
-                                    </i>
-                                    <div className="d-flex flex-row m-1">
-                                        <span className="m-2 p-0 gradient-text">来点数学分析B1</span>
-                                    </div>
-                                </div>
-                                
-                                {/* 一言 - 客户端组件 */}
-                                <HitokotoCard />
-                                
                                 {/* 音乐播放器 */}
                                 <MusicPlayer />
-                                
-                                {/* 建造中 */}
-                                <div className="blog-post-w blog-small-card-effect d-flex flex-column ms-auto col-12 rounded-3">
-                                    <i className="bi bi-translate p-2">设施建造中</i>
-                                </div>
                             </div>
                             
-                            {/* 中间内容区域 - 博客列表 */}
-                            <div className="blog-large-card blog-post-w container d-flex flex-column align-items-center col-5 gap-4 p-1 m-1 rounded-3">
-                                <div className="container d-flex flex-column align-items-center col-12 gap-4 p-1 m-1 rounded-3">
-                                    {blogs.map(blog => (
-                                        <BlogCard
-                                            key={blog.filename}
-                                            blog={blog}
-                                        />
-                                    ))}
+                            {/* 中间内容区域 - 博客详情 */}
+                            <div className="blog-large-card blog-post-w container d-flex flex-column col-5 gap-4 p-1 m-1 rounded-3">
+                                <div className="d-flex flex-row justify-content-between align-items-center mb-3">
+                                    <Link
+                                        href="/"
+                                        className="btn btn-outline-secondary"
+                                    >
+                                        <i className="bi bi-chevron-left blog-title"> 返回</i>
+                                    </Link>
                                 </div>
+                                
+                                <div className="d-flex flex-row align-items-center justify-content-center m-0">
+                                    <h1 className="blog-title mb-0">{blog.metadata.title}</h1>
+                                </div>
+                                
+                                {/* 博客元信息 */}
+                                <div className="d-flex flex-row justify-content-center gap-3 text-muted">
+                                    <span><i className="bi bi-person-fill"></i> {blog.metadata.author}</span>
+                                    <span><i className="bi bi-calendar-fill"></i> {formatDate(blog.metadata.date)}</span>
+                                    {blog.metadata.tags && (
+                                        <span><i className="bi bi-tags-fill"></i> {Array.isArray(blog.metadata.tags) ? blog.metadata.tags.join(', ') : blog.metadata.tags}</span>
+                                    )}
+                                </div>
+                                
+                                <hr className="m-0" />
+                                
+                                <div
+                                    className="markdown-content"
+                                    dangerouslySetInnerHTML={{ __html: blog.htmlContent }}
+                                />
                             </div>
                             
                             {/* 右侧栏 */}

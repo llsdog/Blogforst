@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{7e729c77cd, bootstrap-icons}" />
-    <excludedPredefinedLibrary name="my-next-app/node_modules" />
+    <file url="PROJECT" libraries="{7e729c77cd, gsap}" />
   </component>
 </project>

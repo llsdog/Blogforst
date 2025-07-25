@@ -6,8 +6,10 @@ export interface BlogMetadata {
     image?: string;
     comments?: number;
     tags?: string[];
-    [key: string]: string | number | string[] | undefined; // 添加索引签名以支持其他属性
+    formattedDate?: string; // 添加这个字段
+    [key: string]: string | number | string[] | undefined;
 }
+
 
 export interface BlogPost {
     filename: string;

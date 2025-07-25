@@ -67,7 +67,13 @@ export const useMusicPlayer = (options: MusicPlayerOptions = {}) => {
     }, [volume, currentSong, options]);
     
     const loadPlaylist = async () => {
-        const response = await fetch(`/api/neteasecloudmusic?action=playlist&id=${musicConfig.listid}`);
+        // 直接调用网易云音乐API
+        const response = await fetch(`${musicConfig.baseURL}/playlist/track/all?id=${musicConfig.listid}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            mode: 'cors'
+        });
         const data = await response.json();
         
         if (data.code === 200 && data.songs) {
@@ -89,7 +95,12 @@ export const useMusicPlayer = (options: MusicPlayerOptions = {}) => {
     };
     
     const getSongUrl = async (songId: number): Promise<string> => {
-        const response = await fetch(`/api/neteasecloudmusic?action=songurl&id=${songId}`);
+        const response = await fetch(`${musicConfig.baseURL}/song/url?id=${songId}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            mode: 'cors'
+        });
         const data = await response.json();
         
         if (data.code === 200 && data.data?.[0]?.url) {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import type { GitHubActivity } from '@/types';
+import { githubConfig } from '@/lib/config';
 
 export const useGitHubActivity = () => {
     const [activities, setActivities] = useState<GitHubActivity[]>([]);
@@ -90,7 +91,18 @@ export const useGitHubActivity = () => {
         setError(null);
         
         try {
-            const response = await fetch('/api/github-activities');
+            // 直接调用GitHub API
+            const response = await fetch(
+                `https://api.github.com/users/${githubConfig.username}/events`,
+                {
+                    headers: {
+                        'Accept': 'application/vnd.github+json',
+                        'Authorization': githubConfig.token ? `Bearer ${githubConfig.token}` : '',
+                        'X-GitHub-Api-Version': '2022-11-28',
+                    },
+                }
+            );
+            
             if (!response.ok) {
                 throw new Error('Failed to fetch activities');
             }
