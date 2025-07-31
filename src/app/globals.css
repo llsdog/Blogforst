@@ -20,19 +20,19 @@
 }
 
 .btn-enhance {
-  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s !important;
 }
 
 .btn-enhance:hover {
-  background: rgba(208, 209, 203, 0.5);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(208, 209, 203, 0.5);
+  background: rgba(208, 209, 203, 0.5) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 20px rgba(208, 209, 203, 0.5) !important;
 }
 
 .btn-enhance:active {
-  background: rgba(208, 209, 203, 0.7);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(208, 209, 203, 0.7);
+  background: rgba(208, 209, 203, 0.7) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 20px rgba(208, 209, 203, 0.7) !important;
 }
 
 .page-background-moon {
@@ -260,7 +260,7 @@
 
 #body-home-bottom-mainpage {
   min-height: 30vh;
-  background: rgba(255, 255, 255, 1);
+  background: linear-gradient(to bottom, #ffffff, #f8f8f8);
 }
 
 #nav {

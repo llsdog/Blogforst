@@ -108,11 +108,11 @@ export function HomeClient({ initialBlogs }: HomeClientProps) {
                                 </button>
                                 <button
                                     type="button"
-                                    id="button-to-readme"
+                                    id="button-to-readme-loading"
                                     className="btn text-white rounded-4 focus-ring custom-focus btn-enhance page-button"
                                     onClick={() => switchTo('body-home-bottom-readme')}
                                 >
-                                    关于我
+                                    施工中...
                                 </button>
                             </div>
                         </div>
@@ -258,7 +258,7 @@ export function HomeClient({ initialBlogs }: HomeClientProps) {
                             
                             {/* 右侧栏 - 保持不变 */}
                             <div className="blog-large-card d-flex flex-column gap-4 p-3 me-auto rounded-3" style={{ flex: '0 0 auto', width: '20%' }}>
-                                <div className="blog-small-card blog-post-w d-flex flex-column rounded-3">
+                                <div className="d-flex blog-post-w flex-column rounded-3 p-2">
                                     <div className="d-flex flex-row">
                                         <i className="bi bi-github p-1"></i>
                                         <span className="m-1 gradient-text">看看我在GitHub干啥</span>
@@ -270,14 +270,6 @@ export function HomeClient({ initialBlogs }: HomeClientProps) {
                         </div>
                     </div>
                 </section>
-                
-                {/* 关于页面 */}
-                <section id="body-home-bottom-readme" className="page container-fluid d-flex w-100 py-4">
-                    <div className="d-flex justify-content-center align-items-center w-100 h-100">
-                        <h2></h2>
-                    </div>
-                </section>
-            
             </div>
         </>
     );

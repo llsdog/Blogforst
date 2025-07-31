@@ -1,8 +1,8 @@
 ---
-title: "JS下雪组件"
+title: "JS·雪"
 author: "llsdog"
 date: "2025-07-08"
-description: "该代码纯原生, 无任何依赖, 可创建SnowEffect.js并将其封装在其中"
+description: "原生无依赖,让你的网站下一场雪"
 image: "/blog/blog_2/blog_2_img1.jpg"
 tags: ["Javascript", "Code"]
 comments: 0
