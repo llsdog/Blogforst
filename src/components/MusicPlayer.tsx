@@ -70,13 +70,15 @@ export const MusicPlayer: React.FC = () => {
             <div className="d-flex flex-row rounded-3 align-items-center justify-content-center">
                 <i className="bi bi-music-note-beamed m-1"></i>
                 <span className="blog-i">随机放首背景音乐听听</span>
-                <i className="bi bi-chevron-right m-0"></i>
+                
                 <button
-                    className={`d-flex flex-row btn custom-focus music-play-button m-1 p-1 rounded-4 blog-fontstyle ${buttonState}`}
+                    className={`d-flex flex-row btn custom-focus music-play-button m-2 p-1 rounded-4 blog-title btn-outline-secondary ${buttonState}`}
                     type="button"
                     onClick={handlePlayClick}
                     disabled={buttonState !== 'idle'}
+                    style={{color: '#007bff'}}
                 >
+                    <i className="bi bi-chevron-right m-0"></i>
                     <span>{getButtonText()}</span>
                 </button>
             </div>

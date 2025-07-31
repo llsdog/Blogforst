@@ -1,16 +1,23 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import type { BlogPost } from '@/types';
 import React from "react";
 
 interface BlogCardProps {
     blog: BlogPost;
-    onClick: (blog: BlogPost) => void;
     formatDate: (date: string) => string;
+    onBlogClick?: (filename: string) => void;
+    enableInlineView?: boolean; // 新增：控制是否启用内联查看
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ blog, onClick, formatDate }) => {
+export const BlogCard: React.FC<BlogCardProps> = ({
+                                                      blog,
+                                                      formatDate,
+                                                      onBlogClick,
+                                                      enableInlineView = false
+                                                  }) => {
     const { metadata } = blog;
     const {
         title = 'No Title',
@@ -22,16 +29,19 @@ export const BlogCard: React.FC<BlogCardProps> = ({ blog, onClick, formatDate })
     } = metadata;
     
     const handleClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        onClick(blog);
+        if (enableInlineView && onBlogClick) {
+            e.preventDefault();
+            onBlogClick(blog.filename);
+        }
+        // 如果 enableInlineView 为 false，则让 Link 正常工作
     };
     
-    return (
+    const cardContent = (
         <article
             className="blog-small-card-effect blog-post rounded-4 border border-2 border-dark p-3 position-relative"
-            onClick={handleClick}
             style={{ cursor: 'pointer' }}
             data-blog={blog.filename}
+            onClick={handleClick}
         >
             <div className="blog-post-div d-inline-block float-start">
                 <Image
@@ -67,5 +77,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({ blog, onClick, formatDate })
                 </div>
             </div>
         </article>
+    );
+    
+    // 如果启用内联查看，直接返回内容；否则用 Link 包装
+    return enableInlineView ? cardContent : (
+        <Link href={`/blog/${blog.filename}`} className="text-decoration-none">
+            {cardContent}
+        </Link>
     );
 };

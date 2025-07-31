@@ -99,7 +99,7 @@
 }
 
 .blog-title {
-  font-family: STHupo, serif;
+  font-family: STHupo, serif !important;
 }
 
 .blog-text {
@@ -115,7 +115,7 @@
 }
 
 .blog-fontstyle{
-  font-family: STKaiti, serif;
+  font-family: STKaiti, serif !important;
   color: rgb(0, 123, 255);
 }
 
